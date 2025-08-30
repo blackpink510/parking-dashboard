@@ -30,20 +30,29 @@ export default function ParkingDashboard() {
           gap: 10,
         }}
       >
-        {slots.map((s) => (
-          <div
-            key={s.slot_id}
-            style={{
-              border: "1px solid #ccc",
-              padding: 10,
-              borderRadius: 8,
-            }}
-          >
-            <strong>{s.slot_id}</strong>
-            <div>{s.status}</div>
-            <div style={{ fontSize: 12, color: "#666" }}>{s.last_updated}</div>
-          </div>
-        ))}
+        {slots.map((s) => {
+          const statusColor =
+            s.status === "occupied"
+              ? "red"
+              : s.status === "empty"
+              ? "green"
+              : "black";
+
+          return (
+            <div
+              key={s.slot_id}
+              style={{
+                border: "1px solid #ccc",
+                padding: 10,
+                borderRadius: 8,
+              }}
+            >
+              <strong>{s.slot_id}</strong>
+              <div style={{ color: statusColor }}>{s.status}</div>
+              <div style={{ fontSize: 12, color: "#666" }}>{s.last_updated}</div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
